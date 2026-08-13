@@ -26,17 +26,41 @@ const challenges = [
     icon: '/assets/challenges/icon-5-systemgrenzen.svg',
   },
 ];
+
+// Barrier-tape decoration, built as code (no image asset): diagonal red/white hazard stripes.
+const tapeStrips = [
+  { transform: 'rotate(-12 700 160)', y: 60 },
+  { transform: undefined, y: 210 },
+];
 ---
 
 <section
   id="herausforderungen"
   class="relative overflow-hidden bg-[#00497f] py-20 sm:py-24"
+  data-reveal
 >
-  <div
-    class="pointer-events-none absolute inset-0"
-    style="background-image: url('/assets/challenges/background-wavy.png'); background-size: cover; background-position: center;"
+  <svg
+    class="pointer-events-none absolute top-1/2 left-1/2 h-auto w-[130%] -translate-x-1/2 -translate-y-1/2 opacity-90"
+    viewBox="0 0 1400 320"
+    preserveAspectRatio="xMidYMid slice"
+    aria-hidden="true"
   >
-  </div>
+    <defs>
+      <pattern id="hazard-stripes" width="56" height="56" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <rect width="56" height="56" fill="#e01b2e" />
+        <rect width="28" height="56" fill="#ffffff" />
+      </pattern>
+    </defs>
+
+    {
+      tapeStrips.map((strip) => (
+        <g transform={strip.transform}>
+          <rect x="-200" y={strip.y} width="1800" height="76" fill="url(#hazard-stripes)" />
+          <rect x="-200" y={strip.y} width="1800" height="76" fill="none" stroke="#00000030" stroke-width="2" />
+        </g>
+      ))
+    }
+  </svg>
 
   <div class="relative mx-auto max-w-[1200px] px-6 lg:px-8">
     <div class="mx-auto max-w-2xl pb-4 text-center">
@@ -52,10 +76,13 @@ const challenges = [
 
     <div class="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {
-        challenges.map((item) => (
+        challenges.map((item, i) => (
           <div class="flex flex-col items-start gap-[19px] rounded-xl border border-border/80 bg-[#f2f8fb] p-[37px] shadow-[0px_8px_30px_0px_rgba(148,163,184,0.06),0px_1px_3px_0px_rgba(0,0,0,0.02)] backdrop-blur-[6px]">
-            <span class="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-[10px] bg-[#fecaca]">
-              <img src={item.icon} alt="" class="h-5 w-5" width="20" height="20" />
+            <span
+              class="icon-pulse flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-[10px] bg-[#fecaca]"
+              style={`animation-delay: ${i * 220}ms;`}
+            >
+              <img src={item.icon} alt="" class="h-5 w-5 rotate-180" width="20" height="20" />
             </span>
             <h3 class="text-[21.6px] font-bold tracking-[-0.432px] text-foreground">{item.title}</h3>
             <p class="text-[15.2px] leading-[24.32px] text-muted">{item.body}</p>
@@ -72,7 +99,7 @@ const challenges = [
         <img
           src="/assets/challenges/icon-6-info.svg"
           alt=""
-          class="pointer-events-none absolute -right-5 -bottom-5 h-32 w-auto"
+          class="pointer-events-none absolute -right-5 -bottom-5 h-32 w-auto rotate-180"
         />
       </div>
     </div>

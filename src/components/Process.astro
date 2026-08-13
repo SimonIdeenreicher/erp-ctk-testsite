@@ -30,13 +30,13 @@ const steps = [
 
 <section id="vorgehen" class="relative overflow-hidden bg-gradient-to-b from-background to-brand py-20 md:py-24">
   <div
-    class="pointer-events-none absolute inset-0 bg-bottom bg-no-repeat"
-    style="background-image: url(/assets/process/dots-pattern.png); background-size: 100% auto;"
+    class="pointer-events-none absolute inset-0"
+    style="background-image: radial-gradient(currentColor 1.5px, transparent 1.5px); background-size: 22px 22px; color: white; opacity: 0.35;"
   >
   </div>
 
   <div class="relative mx-auto max-w-[1200px] px-6 lg:px-8">
-    <div class="text-center">
+    <div class="text-center" data-reveal>
       <p class="flex items-center justify-center gap-2 text-sm font-semibold tracking-[1.4px] text-brand-dark uppercase">
         <span class="h-[21px] w-[5px] rounded-[4px] bg-brand"></span>
         Der Weg zum Erfolg
@@ -53,13 +53,15 @@ const steps = [
 
       <ol class="flex flex-col gap-8 md:gap-10">
         {
-          steps.map((step) => (
+          steps.map((step, i) => (
             <li class="md:grid md:grid-cols-2 md:gap-x-20">
               <div
                 class:list={[
                   'rounded-xl border border-border/80 bg-white/85 p-8 shadow-[0_8px_30px_0_rgba(148,163,184,0.06),0_1px_3px_0_rgba(0,0,0,0.02)] backdrop-blur-[6px]',
                   step.n % 2 === 1 ? 'md:col-start-2' : 'md:col-start-1',
                 ]}
+                data-reveal
+                style={`transition-delay: ${i * 150}ms;`}
               >
                 <div class="flex items-center gap-3">
                   <span class="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-full bg-brand text-[17.6px] font-bold text-white shadow-[0_4px_5px_0_rgba(59,130,246,0.3)]">
@@ -75,7 +77,7 @@ const steps = [
       </ol>
     </div>
 
-    <div class="mt-10 text-center md:mt-14">
+    <div class="mt-10 text-center md:mt-14" data-reveal style={`transition-delay: ${steps.length * 150}ms;`}>
       <a
         href="#kontakt"
         class="inline-block rounded-lg bg-gradient-to-br from-brand to-brand-dark px-6 py-3 text-sm font-semibold text-white shadow-[0_4px_7px_0_rgba(59,130,246,0.35)] transition-opacity hover:opacity-90"

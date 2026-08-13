@@ -38,7 +38,7 @@ const modules = [
 ];
 ---
 
-<section id="winline" class="bg-background py-24">
+<section id="winline" class="bg-background py-24" data-reveal>
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <p class="flex items-center gap-2 text-sm font-semibold tracking-[1.4px] text-brand-dark uppercase">
       <span class="h-[21px] w-[5px] rounded-[4px] bg-brand"></span>
@@ -53,10 +53,36 @@ const modules = [
       Unternehmensbereiche in einem einzigen, modular erweiterbaren System.
     </p>
 
-    <div class="mt-12 grid gap-4" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+    <div class="mt-12 flex items-center justify-end gap-2">
+      <button
+        id="tech-slider-prev"
+        type="button"
+        aria-label="Vorherige Module"
+        class="flex size-9 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-brand hover:text-foreground disabled:pointer-events-none disabled:opacity-30"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+      <button
+        id="tech-slider-next"
+        type="button"
+        aria-label="Nächste Module"
+        class="flex size-9 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-brand hover:text-foreground disabled:pointer-events-none disabled:opacity-30"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </button>
+    </div>
+
+    <div
+      id="tech-slider"
+      class="mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-1 py-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+    >
       {
         modules.map((m) => (
-          <div class="rounded-xl border border-[#a6cbe3] bg-[#f2f8fb] p-6 shadow-[0px_8px_30px_0px_rgba(148,163,184,0.06),0px_1px_3px_0px_rgba(0,0,0,0.02)] backdrop-blur-[6px]">
+          <div class="shrink-0 snap-start basis-full rounded-xl border border-[#a6cbe3] bg-[#f2f8fb] p-6 shadow-[0px_8px_30px_0px_rgba(148,163,184,0.06),0px_1px_3px_0px_rgba(0,0,0,0.02)] backdrop-blur-[6px] md:basis-[calc(50%-8px)]">
             <img src={m.icon} alt="" class="size-8 -scale-y-100" />
             <h3 class="mt-3 text-base font-bold tracking-[-0.4px] text-foreground">{m.title}</h3>
             <p class="mt-1.5 text-sm leading-[1.6] break-words text-muted">{m.body}</p>
@@ -95,3 +121,23 @@ const modules = [
     </div>
   </div>
 </section>
+
+<script is:inline>
+  (function () {
+    const slider = document.getElementById('tech-slider');
+    const prev = document.getElementById('tech-slider-prev');
+    const next = document.getElementById('tech-slider-next');
+    if (!slider || !prev || !next) return;
+
+    function updateButtons() {
+      prev.disabled = slider.scrollLeft <= 4;
+      next.disabled = slider.scrollLeft >= slider.scrollWidth - slider.clientWidth - 4;
+    }
+
+    prev.addEventListener('click', () => slider.scrollBy({ left: -slider.clientWidth, behavior: 'smooth' }));
+    next.addEventListener('click', () => slider.scrollBy({ left: slider.clientWidth, behavior: 'smooth' }));
+    slider.addEventListener('scroll', updateButtons);
+    window.addEventListener('resize', updateButtons);
+    updateButtons();
+  })();
+</script>
