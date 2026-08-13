@@ -1,0 +1,97 @@
+---
+const modules = [
+  {
+    title: 'Warenwirtschaft',
+    body: 'Zentrale Verwaltung von Lagern, Artikeln, Bestellungen und Logistikabläufen.',
+    icon: '/assets/technical/icon-warenwirtschaft.svg',
+  },
+  {
+    title: 'Einkauf & Vertrieb',
+    body: 'Automatisierte Angebotsprozesse, Preiskalkulationen und Lieferantenmanagement.',
+    icon: '/assets/technical/icon-einkauf-vertrieb.svg',
+  },
+  {
+    title: 'CRM',
+    body: 'Umfassende Kundenbetreuung, lückenlose Kontakthistorie und Vertriebspipelines.',
+    icon: '/assets/technical/icon-crm.svg',
+  },
+  {
+    title: 'Produktion',
+    body: 'Effiziente Produktionsplanung, Ressourcensteuerung (PPS) und Fertigungsaufträge.',
+    icon: '/assets/technical/icon-produktion.svg',
+  },
+  {
+    title: 'Finanzbuchhaltung',
+    body: 'Revisionssichere Buchhaltung, Umsatzsteueranmeldung und Bilanzerstellung.',
+    icon: '/assets/technical/icon-finanzbuchhaltung.svg',
+  },
+  {
+    title: 'Controlling',
+    body: 'Echtzeitauswertungen, Budgets und finanzielle Kennzahlen auf Knopfdruck.',
+    icon: '/assets/technical/icon-controlling.svg',
+  },
+  {
+    title: 'Dokumentenmanagement',
+    body: 'GoBD-konforme Archivierung und schneller Zugriff auf alle Dokumente.',
+    icon: '/assets/technical/icon-dokumentenmanagement.svg',
+  },
+];
+---
+
+<section id="winline" class="bg-background py-24">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <p class="flex items-center gap-2 text-sm font-semibold tracking-[1.4px] text-brand-dark uppercase">
+      <span class="h-[21px] w-[5px] rounded-[4px] bg-brand"></span>
+      Die technische Basis
+    </p>
+    <h2 class="mt-2 text-4xl leading-[1.2] font-bold tracking-[-0.88px] text-foreground sm:text-[44px]">
+      mesonic WinLine
+    </h2>
+    <p class="mt-4 max-w-2xl text-lg leading-[1.6] text-muted">
+      Seit vielen Jahren setzen wir erfolgreich auf die etablierte ERP-Lösung
+      <strong class="font-semibold text-foreground">mesonic WinLine</strong>. Die Software vereint alle zentralen
+      Unternehmensbereiche in einem einzigen, modular erweiterbaren System.
+    </p>
+
+    <div class="mt-12 grid gap-4" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+      {
+        modules.map((m) => (
+          <div class="rounded-xl border border-[#a6cbe3] bg-[#f2f8fb] p-6 shadow-[0px_8px_30px_0px_rgba(148,163,184,0.06),0px_1px_3px_0px_rgba(0,0,0,0.02)] backdrop-blur-[6px]">
+            <img src={m.icon} alt="" class="size-8 -scale-y-100" />
+            <h3 class="mt-3 text-base font-bold tracking-[-0.4px] text-foreground">{m.title}</h3>
+            <p class="mt-1.5 text-sm leading-[1.6] break-words text-muted">{m.body}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div class="flex items-center gap-6 rounded-xl border border-[#38bdf8] bg-[#e0f2fe] p-6 shadow-[0px_8px_30px_0px_rgba(148,163,184,0.06),0px_1px_3px_0px_rgba(0,0,0,0.02)] backdrop-blur-[6px]">
+        <img src="/assets/technical/mesonic-logo.png" alt="mesonic" class="h-[43px] w-auto shrink-0" />
+        <div class="flex items-center gap-3">
+          <img src="/assets/technical/icon-check-badge.svg" alt="" class="size-7 shrink-0 -scale-y-100" />
+          <p class="text-sm leading-snug">
+            <span class="block font-semibold text-foreground">Zertifizierter Partner</span>
+            <span class="text-muted">Erfahrene mesonic-Experten</span>
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="relative overflow-hidden rounded-xl p-8"
+        style="background-image: linear-gradient(127.26deg, var(--brand) 0%, #00497f 99.994%);"
+      >
+        <img
+          src="/assets/technical/icon-gear-callout.svg"
+          alt=""
+          class="pointer-events-none absolute right-[-20px] bottom-[-28px] size-32 -scale-y-100"
+        />
+        <h3 class="relative text-xl font-bold tracking-[-0.4px] text-white">Individuelle Anpassung</h3>
+        <p class="relative mt-2 max-w-md text-sm leading-[1.6] text-white/85">
+          Als zertifizierter Partner passen wir alle Module von mesonic WinLine exakt an Ihre spezifischen
+          Branchenanforderungen an.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,87 @@
+---
+const steps = [
+  {
+    n: 1,
+    title: 'Verstehen',
+    body: 'Analyse Ihrer bestehenden Prozesse, Anforderungen und individuellen Herausforderungen im operativen Geschäft.',
+  },
+  {
+    n: 2,
+    title: 'Konzipieren',
+    body: 'Entwicklung eines individuellen, tragfähigen ERP-Konzepts, das exakt auf Ihre Unternehmensziele abgestimmt ist.',
+  },
+  {
+    n: 3,
+    title: 'Implementieren',
+    body: 'Professionelle Einführung der Software, sichere Migration Ihrer Altdaten und praxisnahe Mitarbeiterschulungen.',
+  },
+  {
+    n: 4,
+    title: 'Optimieren',
+    body: 'Feinjustierung und kontinuierliche Anpassung der Workflows auf Basis der täglichen Praxiserfahrung.',
+  },
+  {
+    n: 5,
+    title: 'Begleiten',
+    body: 'Zuverlässiger, langfristiger Support, laufende Updates und kontinuierliche Weiterentwicklung Ihres Systems.',
+  },
+];
+---
+
+<section id="vorgehen" class="relative overflow-hidden bg-gradient-to-b from-background to-brand py-20 md:py-24">
+  <div
+    class="pointer-events-none absolute inset-0 bg-bottom bg-no-repeat"
+    style="background-image: url(/assets/process/dots-pattern.png); background-size: 100% auto;"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-[1200px] px-6 lg:px-8">
+    <div class="text-center">
+      <p class="flex items-center justify-center gap-2 text-sm font-semibold tracking-[1.4px] text-brand-dark uppercase">
+        <span class="h-[21px] w-[5px] rounded-[4px] bg-brand"></span>
+        Der Weg zum Erfolg
+      </p>
+      <h2
+        class="mt-3 pb-4 text-3xl leading-[1.2] font-bold tracking-[-0.5px] text-foreground sm:text-4xl lg:text-[44px] lg:tracking-[-0.88px]"
+      >
+        Unser Vorgehen
+      </h2>
+    </div>
+
+    <div class="relative mx-auto mt-10 max-w-[900px] md:mt-14">
+      <div class="absolute top-0 bottom-0 left-1/2 hidden w-[2px] -translate-x-1/2 bg-accent md:block"></div>
+
+      <ol class="flex flex-col gap-8 md:gap-10">
+        {
+          steps.map((step) => (
+            <li class="md:grid md:grid-cols-2 md:gap-x-20">
+              <div
+                class:list={[
+                  'rounded-xl border border-border/80 bg-white/85 p-8 shadow-[0_8px_30px_0_rgba(148,163,184,0.06),0_1px_3px_0_rgba(0,0,0,0.02)] backdrop-blur-[6px]',
+                  step.n % 2 === 1 ? 'md:col-start-2' : 'md:col-start-1',
+                ]}
+              >
+                <div class="flex items-center gap-3">
+                  <span class="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-full bg-brand text-[17.6px] font-bold text-white shadow-[0_4px_5px_0_rgba(59,130,246,0.3)]">
+                    {step.n}
+                  </span>
+                  <h3 class="text-[20px] font-bold tracking-tight text-[#0f172a] md:text-[22px]">{step.title}</h3>
+                </div>
+                <p class="mt-3 text-base leading-[1.6] text-[#64748b]">{step.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+
+    <div class="mt-10 text-center md:mt-14">
+      <a
+        href="#kontakt"
+        class="inline-block rounded-lg bg-gradient-to-br from-brand to-brand-dark px-6 py-3 text-sm font-semibold text-white shadow-[0_4px_7px_0_rgba(59,130,246,0.35)] transition-opacity hover:opacity-90"
+      >
+        Unverbindliches Beratungsgespräch vereinbaren
+      </a>
+    </div>
+  </div>
+</section>

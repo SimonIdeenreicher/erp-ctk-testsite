@@ -1,0 +1,80 @@
+---
+const challenges = [
+  {
+    title: 'System-Wildwuchs',
+    body: 'Informationen und wertvolle Daten sind auf viele verschiedene, isolierte Systeme im Unternehmen verteilt.',
+    icon: '/assets/challenges/icon-1-system-wildwuchs.svg',
+  },
+  {
+    title: 'Excel-Behelfslösungen',
+    body: 'Prozesslücken und manuelle Datenübertragungen werden mühsam über unzählige Excel-Tabellen geflickt.',
+    icon: '/assets/challenges/icon-2-excel.svg',
+  },
+  {
+    title: 'Inselwissen',
+    body: 'Kritische Betriebsabläufe und wichtiges Prozesswissen stecken oft nur in den Köpfen einzelner Mitarbeiter.',
+    icon: '/assets/challenges/icon-3-inselwissen.svg',
+  },
+  {
+    title: 'Blinder Flug',
+    body: 'Auswertungen und Berichte sind extrem aufwendig zu erstellen, ungenau und bieten kaum echte Transparenz.',
+    icon: '/assets/challenges/icon-4-blinder-flug.svg',
+  },
+  {
+    title: 'Systemgrenzen',
+    body: 'Das bestehende, veraltete ERP-System bremst Ihr Wachstum und stößt im Alltag an seine Grenzen.',
+    icon: '/assets/challenges/icon-5-systemgrenzen.svg',
+  },
+];
+---
+
+<section
+  id="herausforderungen"
+  class="relative overflow-hidden bg-[#00497f] py-20 sm:py-24"
+>
+  <div
+    class="pointer-events-none absolute inset-0"
+    style="background-image: url('/assets/challenges/background-wavy.png'); background-size: cover; background-position: center;"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-[1200px] px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl pb-4 text-center">
+      <p class="flex items-center justify-center gap-2 pt-[25px] text-sm font-semibold tracking-[1.4px] text-[#e6f0f7] uppercase">
+        <span class="h-[21px] w-[5px] shrink-0 rounded-[4px] bg-[#f2f8fb]"></span>
+        Häufige Hürden im Mittelstand
+      </p>
+      <h2 class="mt-3 text-3xl leading-tight font-bold tracking-tight text-[#e2e8f0] sm:text-4xl lg:text-[44px] lg:leading-[52.8px] lg:tracking-[-0.88px]">
+        Kommen Ihnen diese <br class="hidden sm:block" />
+        Herausforderungen bekannt vor?
+      </h2>
+    </div>
+
+    <div class="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        challenges.map((item) => (
+          <div class="flex flex-col items-start gap-[19px] rounded-xl border border-border/80 bg-[#f2f8fb] p-[37px] shadow-[0px_8px_30px_0px_rgba(148,163,184,0.06),0px_1px_3px_0px_rgba(0,0,0,0.02)] backdrop-blur-[6px]">
+            <span class="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-[10px] bg-[#fecaca]">
+              <img src={item.icon} alt="" class="h-5 w-5" width="20" height="20" />
+            </span>
+            <h3 class="text-[21.6px] font-bold tracking-[-0.432px] text-foreground">{item.title}</h3>
+            <p class="text-[15.2px] leading-[24.32px] text-muted">{item.body}</p>
+          </div>
+        ))
+      }
+
+      <div class="relative flex flex-col items-start gap-3 overflow-hidden rounded-xl border border-accent bg-accent-soft px-[37px] pt-[37px] pb-[42px] sm:col-span-2 lg:col-span-1">
+        <h3 class="max-w-[294px] text-[21.6px] font-bold tracking-[-0.432px] text-[#536a11]">Unsere Erfahrung:</h3>
+        <p class="text-[15.2px] leading-[24.32px] text-[#698716]">
+          Die meisten Unternehmen benötigen nicht einfach eine neue Software, sondern eine Lösung, die zu ihren
+          Prozessen passt und mit ihrem Unternehmen wächst.
+        </p>
+        <img
+          src="/assets/challenges/icon-6-info.svg"
+          alt=""
+          class="pointer-events-none absolute -right-5 -bottom-5 h-32 w-auto"
+        />
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,70 @@
+---
+const points = [
+  {
+    title: 'Langjährige ERP-Erfahrung',
+    body: 'Erfolgreiche Projekte und Branchenwissen im Mittelstand seit Jahren.',
+    icon: '/assets/why-ctk/icon-history.svg',
+  },
+  {
+    title: 'Eigene Entwicklungsabteilung',
+    body: 'Direkte Umsetzung von Sonderwünschen und Spezial-Schnittstellen.',
+    icon: '/assets/why-ctk/icon-code.svg',
+  },
+  {
+    title: 'Persönliche Ansprechpartner',
+    body: 'Kein anonymes Call-Center, sondern feste Techniker für Ihr Projekt.',
+    icon: '/assets/why-ctk/icon-person.svg',
+  },
+  {
+    title: 'Langfristige Betreuung',
+    body: 'Wir lassen Sie nach dem Go-Live nicht allein, sondern optimieren weiter.',
+    icon: '/assets/why-ctk/icon-heart.svg',
+  },
+];
+---
+
+<section
+  id="warum-ctk"
+  class="relative overflow-hidden bg-[#f0f0f0] bg-cover bg-center py-24 dark:bg-dark-surface-alt"
+  style="background-image: url(/assets/why-ctk/why-ctk-bg.png);"
+>
+  <div class="absolute inset-0 hidden dark:block dark:bg-dark-surface-alt/50"></div>
+
+  <div class="relative mx-auto grid max-w-[1200px] grid-cols-1 items-center gap-10 px-6 lg:grid-cols-2">
+    <div class="max-w-[550px]">
+      <p class="flex items-center gap-2 text-sm font-semibold tracking-[1.4px] text-brand-dark uppercase dark:text-white/80">
+        <span class="h-[21px] w-[5px] rounded-[4px] bg-brand"></span>
+        Warum CTK?
+      </p>
+      <h2 class="mt-2 text-4xl leading-[1.2] font-bold tracking-[-0.88px] text-foreground sm:text-[44px] dark:text-white">
+        Darum sollten Sie uns kennenlernen
+      </h2>
+      <p class="mt-4 max-w-md text-lg leading-[1.6] text-foreground dark:text-white/80">
+        Viele Anbieter verkaufen ERP-Systeme. Viele Entwickler programmieren individuelle Anpassungen.
+        <strong class="font-semibold">Wir verbinden beides.</strong>
+      </p>
+    </div>
+
+    <div
+      class="rounded-xl px-10 py-10 shadow-[0px_8px_30px_0px_rgba(148,163,184,0.06),0px_1px_3px_0px_rgba(0,0,0,0.02)] backdrop-blur-[6px]"
+      style="background-image: linear-gradient(105deg, var(--brand) 0%, #00497f 100%);"
+    >
+      <h3 class="text-[21.6px] leading-[1.2] font-bold tracking-[-0.432px] text-white">Das zeichnet uns aus:</h3>
+      <ul class="mt-7 space-y-7">
+        {
+          points.map((p) => (
+            <li class="flex items-start gap-5">
+              <span class="flex size-11 shrink-0 items-center justify-center rounded-lg border border-accent bg-accent-soft">
+                <img src={p.icon} alt="" class="size-5 -scale-y-100" />
+              </span>
+              <div>
+                <p class="text-[17.6px] leading-[1.2] font-bold tracking-[-0.352px] text-white">{p.title}</p>
+                <p class="mt-1 text-sm leading-[1.6] text-white/80">{p.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

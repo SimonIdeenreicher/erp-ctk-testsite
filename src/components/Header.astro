@@ -1,0 +1,91 @@
+---
+const navLinks = [
+  { label: 'Herausforderungen', href: '#herausforderungen' },
+  { label: 'Vorteile', href: '#vorteile' },
+  { label: 'Vorgehen', href: '#vorgehen' },
+  { label: 'mesonic WinLine', href: '#winline' },
+  { label: 'Warum CTK', href: '#warum-ctk' },
+  { label: 'Referenzen', href: '#referenzen' },
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur">
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-3 lg:px-8">
+    <a href="#" class="flex shrink-0 items-center gap-3" aria-label="CTK Business Software Home">
+      <img
+        src="/assets/header/ctk-logo.svg"
+        alt="CTK IT-Lösungen und Service"
+        width="113"
+        height="43"
+        class="h-[43px] w-[113px]"
+      />
+    </a>
+
+    <nav class="hidden items-center gap-6 lg:flex">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm font-medium text-muted transition-colors hover:text-foreground"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <button
+        id="theme-toggle"
+        type="button"
+        aria-label="Farbschema umschalten"
+        class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border bg-surface text-muted transition-colors hover:text-foreground"
+      >
+        <img
+          id="icon-sun"
+          src="/assets/header/theme-toggle-sun.svg"
+          alt=""
+          width="16"
+          height="16"
+          class="h-4 w-4"
+        />
+        <img
+          id="icon-moon"
+          src="/assets/header/theme-toggle-moon.svg"
+          alt=""
+          width="16"
+          height="16.0156"
+          class="hidden h-4 w-4"
+        />
+      </button>
+      <a
+        href="#kontakt"
+        class="hidden rounded-lg bg-gradient-to-br from-brand to-brand-dark px-4 py-2 text-[14.4px] font-semibold text-white shadow-[0px_4px_14px_0px_rgba(59,130,246,0.35)] transition-opacity hover:opacity-90 sm:inline-block"
+      >
+        Termin vereinbaren
+      </a>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    const toggle = document.getElementById('theme-toggle');
+    const sun = document.getElementById('icon-sun');
+    const moon = document.getElementById('icon-moon');
+
+    function sync() {
+      const isDark = document.documentElement.classList.contains('dark');
+      sun.classList.toggle('hidden', isDark);
+      moon.classList.toggle('hidden', !isDark);
+    }
+
+    toggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+      sync();
+    });
+
+    sync();
+  })();
+</script>
