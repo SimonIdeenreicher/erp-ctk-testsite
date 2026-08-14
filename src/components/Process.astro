@@ -1,4 +1,7 @@
 ---
+const BOOKING_URL =
+  'https://bookings.cloud.microsoft/book/TerminbuchungBeratungsgesprch@ctk-gmbh.de/?ismsaljsauthenabled=true';
+
 const steps = [
   {
     n: 1,
@@ -79,7 +82,9 @@ const steps = [
 
     <div class="mt-10 text-center md:mt-14" data-reveal style={`transition-delay: ${steps.length * 150}ms;`}>
       <a
-        href="#kontakt"
+        href={BOOKING_URL}
+        target="_blank"
+        rel="noopener noreferrer"
         class="inline-block rounded-lg bg-gradient-to-br from-brand to-brand-dark px-6 py-3 text-sm font-semibold text-white shadow-[0_4px_7px_0_rgba(59,130,246,0.35)] transition-opacity hover:opacity-90"
       >
         Unverbindliches Beratungsgespräch vereinbaren

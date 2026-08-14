@@ -1,8 +1,9 @@
 ---
+const FORMINIT_FORM_ID = 'l3y675bax1j';
+
 const fields = [
-  { id: 'name', label: 'Ihr Name', type: 'text', placeholder: 'z. B. Max Mustermann', required: true },
-  { id: 'company', label: 'Unternehmen', type: 'text', placeholder: 'z. B. Musterfirma GmbH', required: true },
-  { id: 'email', label: 'E-Mail-Adresse', type: 'email', placeholder: 'name@firma.de', required: true },
+  { id: 'name', name: 'fi-text-name', label: 'Ihr Name', type: 'text', placeholder: 'z. B. Max Mustermann', required: true },
+  { id: 'company', name: 'fi-sender-company', label: 'Unternehmen', type: 'text', placeholder: 'z. B. Musterfirma GmbH', required: true },
 ];
 ---
 
@@ -21,17 +22,17 @@ const fields = [
         Bewertung Ihrer Möglichkeiten.
       </p>
 
-      <form class="mt-8 space-y-5">
+      <form id="contact-form" class="mt-8 space-y-5">
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
           {
-            fields.slice(0, 2).map((f) => (
+            fields.map((f) => (
               <div>
                 <label for={f.id} class="text-sm font-medium text-foreground">
                   {f.label} {f.required && <span class="text-danger">*</span>}
                 </label>
                 <input
                   id={f.id}
-                  name={f.id}
+                  name={f.name}
                   type={f.type}
                   placeholder={f.placeholder}
                   required={f.required}
@@ -48,7 +49,7 @@ const fields = [
           </label>
           <input
             id="email"
-            name="email"
+            name="fi-sender-email"
             type="email"
             placeholder="name@firma.de"
             required
@@ -60,7 +61,7 @@ const fields = [
           <label for="message" class="text-sm font-medium text-foreground">Ihre Nachricht / Anforderungen</label>
           <textarea
             id="message"
-            name="message"
+            name="fi-text-message"
             rows="4"
             placeholder="Beschreiben Sie kurz Ihre aktuellen Herausforderungen oder Wünsche…"
             class="mt-1.5 w-full resize-none rounded-lg border border-border bg-background px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted focus:border-brand focus:ring-1 focus:ring-brand focus:outline-none"
@@ -68,11 +69,14 @@ const fields = [
         </div>
 
         <button
+          id="contact-form-submit"
           type="submit"
-          class="w-full rounded-lg bg-brand-dark px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+          class="w-full rounded-lg bg-brand-dark px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
         >
           Jetzt unverbindliches Beratungsgespräch vereinbaren
         </button>
+
+        <p id="contact-form-status" class="text-center text-sm" role="status" aria-live="polite"></p>
       </form>
     </div>
 
@@ -119,8 +123,47 @@ const fields = [
           <circle cx="12" cy="12" r="10" />
           <path d="M12 6v6l4 2" />
         </svg>
-        Antwort meist innerhalb 24h
+        Antwort innerhalb von 24h
       </span>
     </div>
   </div>
 </section>
+
+<script define:vars={{ FORMINIT_FORM_ID }} is:inline>
+  (async function () {
+    // Astro bundles a plain <script src="https://..."> as a deferred module import, which would
+    // run after this classic script — load it ourselves so `Forminit` is guaranteed ready in time.
+    await import('https://forminit.com/sdk/v1/forminit.js');
+
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('contact-form-submit');
+    const statusEl = document.getElementById('contact-form-status');
+    const defaultLabel = submitBtn.textContent;
+    const forminitClient = new Forminit();
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Wird gesendet…';
+      statusEl.textContent = '';
+      statusEl.classList.remove('text-accent', 'text-danger');
+
+      try {
+        const formData = new FormData(form);
+        const { error } = await forminitClient.submit(FORMINIT_FORM_ID, formData);
+        if (error) throw new Error(error.message || 'Unbekannter Fehler');
+
+        form.reset();
+        statusEl.textContent = 'Danke! Ihre Nachricht wurde erfolgreich gesendet.';
+        statusEl.classList.add('text-accent');
+      } catch (err) {
+        statusEl.textContent =
+          'Da ist leider etwas schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt per E-Mail.';
+        statusEl.classList.add('text-danger');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = defaultLabel;
+      }
+    });
+  })();
+</script>

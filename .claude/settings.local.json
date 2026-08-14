@@ -70,7 +70,19 @@
       "Bash(sips -Z 500 background-wavy.png --out /tmp/bg-preview.png)",
       "Bash(rm -rf thumbs2)",
       "Bash(mkdir thumbs2 *)",
-      "Bash(qlmanage -t -s 512 -o thumbs2 icon-a.svg icon-b.svg icon-d.svg icon-e.svg icon-f.svg icon-g.svg icon-h.svg)"
+      "Bash(qlmanage -t -s 512 -o thumbs2 icon-a.svg icon-b.svg icon-d.svg icon-e.svg icon-f.svg icon-g.svg icon-h.svg)",
+      "mcp__shipstudio-preview__preview_status",
+      "mcp__shipstudio-preview__preview_navigate",
+      "mcp__shipstudio-preview__preview_screenshot",
+      "mcp__shipstudio-preview__preview_click",
+      "mcp__shipstudio-preview__preview_console",
+      "mcp__shipstudio-preview__preview_query",
+      "mcp__shipstudio-preview__preview_dom",
+      "mcp__shipstudio-preview__preview_set_viewport",
+      "mcp__shipstudio-preview__preview_reload",
+      "mcp__shipstudio-preview__preview_scroll",
+      "Bash(sips *)",
+      "Bash(python3 *)"
     ]
   }
 }

@@ -1,4 +1,7 @@
 ---
+const BOOKING_URL =
+  'https://bookings.cloud.microsoft/book/TerminbuchungBeratungsgesprch@ctk-gmbh.de/?ismsaljsauthenabled=true';
+
 const trustPoints = ['Mehr Transparenz', 'Effizientere Abläufe', 'Weniger Aufwand'];
 
 const checkmarkPath =
@@ -79,7 +82,9 @@ const checkmarkPath =
 
     <div class="mt-7 flex flex-wrap items-center justify-center gap-4">
       <a
-        href="#kontakt"
+        href={BOOKING_URL}
+        target="_blank"
+        rel="noopener noreferrer"
         class="rounded-lg bg-gradient-to-br from-brand to-brand-dark px-6 py-3 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(59,130,246,0.35)] transition-opacity hover:opacity-90"
       >
         Jetzt unverbindlich beraten lassen
