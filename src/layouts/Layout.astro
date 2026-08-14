@@ -29,11 +29,6 @@ const {
     />
     <title>{title}</title>
     <script is:inline>
-      if (localStorage.getItem('theme') === 'dark') {
-        document.documentElement.classList.add('dark');
-      }
-    </script>
-    <script is:inline>
       document.addEventListener('DOMContentLoaded', () => {
         const targets = document.querySelectorAll('[data-reveal]');
         if (!('IntersectionObserver' in window)) {

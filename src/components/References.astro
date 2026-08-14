@@ -71,12 +71,12 @@ const tabs = [
   </div>
 
   <div class="mx-auto mt-12 flex max-w-4xl flex-col gap-6 px-6 lg:px-8">
-    <div class="flex justify-center gap-2 overflow-auto border-b border-border">
+    <div class="flex justify-start gap-2 overflow-x-auto border-b border-border [-ms-overflow-style:none] [scrollbar-width:none] sm:justify-center [&::-webkit-scrollbar]:hidden">
       {
         tabs.map((tab, i) => (
           <label
             for={`tab-${tab.id}`}
-            class="group relative -mb-px flex cursor-pointer items-center gap-2 border-b-2 border-transparent px-6 py-4 text-sm font-semibold text-muted has-checked:border-[#73aed4] has-checked:text-brand-dark"
+            class="group relative -mb-px flex shrink-0 cursor-pointer items-center gap-2 border-b-2 border-transparent px-6 py-4 text-sm font-semibold whitespace-nowrap text-muted has-checked:border-[#73aed4] has-checked:text-brand-dark"
           >
             <input type="radio" name="reference-tab" id={`tab-${tab.id}`} class="peer sr-only" checked={i === 0} />
             <span class="-scale-y-100 inline-block h-4 w-4">
@@ -103,7 +103,7 @@ const tabs = [
                 <p class="mt-5 font-semibold text-foreground">{tab.content.project}</p>
                 <p class="text-sm text-muted">{tab.content.company}</p>
               </div>
-              <div class="flex flex-row gap-4 lg:flex-col">
+              <div class="flex flex-col gap-4">
                 {tab.content.stats.map((s) => (
                   <div class="min-w-[180px] rounded-lg border border-[#c5dd84] bg-accent-soft px-6 py-5 text-center">
                     <p class="text-2xl font-extrabold text-accent">{s.value}</p>
