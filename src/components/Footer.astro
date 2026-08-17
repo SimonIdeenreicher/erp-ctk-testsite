@@ -22,6 +22,7 @@ const columns = [
     links: [
       { label: 'Impressum', href: 'https://www.ctk-gmbh.de/impressum' },
       { label: 'Datenschutz', href: 'https://www.ctk-gmbh.de/datenschutz' },
+      { label: 'Cookie-Einstellungen', href: '#', id: 'footer-cookie-settings' },
     ],
   },
 ];
@@ -84,6 +85,7 @@ const columns = [
                 <li>
                   <a
                     href={link.href}
+                    id={link.id}
                     class="text-[14.4px] leading-[21.6px] text-white/75 transition-colors hover:text-white"
                   >
                     {link.label}
@@ -102,3 +104,13 @@ const columns = [
     </div>
   </div>
 </footer>
+
+<script is:inline>
+  (function () {
+    const link = document.getElementById('footer-cookie-settings');
+    link?.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.ctkOpenCookieSettings?.();
+    });
+  })();
+</script>

@@ -1,0 +1,69 @@
+---
+const PRIVACY_URL = 'https://www.ctk-gmbh.de/datenschutz';
+---
+
+<div
+  id="cookie-consent"
+  class="fixed inset-x-0 bottom-0 z-[100] hidden border-t border-border bg-background/95 px-6 py-5 shadow-[0_-8px_30px_rgba(15,23,42,0.12)] backdrop-blur"
+  role="dialog"
+  aria-live="polite"
+  aria-label="Cookie-Einstellungen"
+>
+  <div class="mx-auto flex max-w-7xl flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <p class="text-sm leading-[1.6] text-muted">
+      Wir verwenden Cookies, um unsere Website bereitzustellen und unser Kontaktformular anzubieten. Notwendige
+      Cookies sind für den Betrieb der Seite erforderlich. Weitere Details finden Sie in unserer
+      <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-dark underline hover:text-brand">
+        Datenschutzerklärung
+      </a>.
+    </p>
+    <div class="flex shrink-0 flex-wrap gap-3">
+      <button
+        id="cookie-consent-necessary"
+        type="button"
+        class="rounded-lg border border-border bg-surface px-4 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-border/40"
+      >
+        Nur notwendige
+      </button>
+      <button
+        id="cookie-consent-all"
+        type="button"
+        class="rounded-lg bg-gradient-to-br from-brand to-brand-dark px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+      >
+        Alle akzeptieren
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    const CONSENT_KEY = 'ctk-cookie-consent';
+    const banner = document.getElementById('cookie-consent');
+    const acceptAllBtn = document.getElementById('cookie-consent-all');
+    const acceptNecessaryBtn = document.getElementById('cookie-consent-necessary');
+
+    function show() {
+      banner.classList.remove('hidden');
+    }
+
+    function hide() {
+      banner.classList.add('hidden');
+    }
+
+    function setConsent(value) {
+      localStorage.setItem(CONSENT_KEY, value);
+      hide();
+      window.dispatchEvent(new CustomEvent('ctk-cookie-consent', { detail: value }));
+    }
+
+    acceptAllBtn.addEventListener('click', () => setConsent('all'));
+    acceptNecessaryBtn.addEventListener('click', () => setConsent('necessary'));
+
+    window.ctkOpenCookieSettings = show;
+
+    if (!localStorage.getItem(CONSENT_KEY)) {
+      show();
+    }
+  })();
+</script>

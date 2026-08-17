@@ -130,25 +130,51 @@ const fields = [
 </section>
 
 <script define:vars={{ FORMINIT_FORM_ID }} is:inline>
-  (async function () {
-    // Astro bundles a plain <script src="https://..."> as a deferred module import, which would
-    // run after this classic script — load it ourselves so `Forminit` is guaranteed ready in time.
-    await import('https://forminit.com/sdk/v1/forminit.js');
+  (function () {
+    const CONSENT_KEY = 'ctk-cookie-consent';
 
     const form = document.getElementById('contact-form');
     const submitBtn = document.getElementById('contact-form-submit');
     const statusEl = document.getElementById('contact-form-status');
     const defaultLabel = submitBtn.textContent;
-    const forminitClient = new Forminit();
+
+    let forminitClientPromise = null;
+
+    function loadForminitClient() {
+      if (!forminitClientPromise) {
+        // Astro bundles a plain <script src="https://..."> as a deferred module import, which would
+        // run after this classic script — load it ourselves so `Forminit` is guaranteed ready in time.
+        forminitClientPromise = import('https://forminit.com/sdk/v1/forminit.js').then(() => new Forminit());
+      }
+      return forminitClientPromise;
+    }
+
+    if (localStorage.getItem(CONSENT_KEY) === 'all') {
+      loadForminitClient();
+    }
+    window.addEventListener('ctk-cookie-consent', (e) => {
+      if (e.detail === 'all') loadForminitClient();
+    });
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      if (localStorage.getItem(CONSENT_KEY) !== 'all') {
+        statusEl.textContent =
+          'Für den Versand nutzen wir einen externen Formular-Dienst. Bitte akzeptieren Sie Cookies, um das Formular zu senden.';
+        statusEl.classList.remove('text-accent');
+        statusEl.classList.add('text-danger');
+        window.ctkOpenCookieSettings?.();
+        return;
+      }
+
       submitBtn.disabled = true;
       submitBtn.textContent = 'Wird gesendet…';
       statusEl.textContent = '';
       statusEl.classList.remove('text-accent', 'text-danger');
 
       try {
+        const forminitClient = await loadForminitClient();
         const formData = new FormData(form);
         const { error } = await forminitClient.submit(FORMINIT_FORM_ID, formData);
         if (error) throw new Error(error.message || 'Unbekannter Fehler');
