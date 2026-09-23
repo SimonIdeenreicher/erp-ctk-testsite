@@ -10,6 +10,7 @@
   --color-surface: var(--surface);
   --color-brand: var(--brand);
   --color-brand-dark: var(--brand-dark);
+  --color-button: var(--button);
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
   --color-danger: var(--danger);
@@ -26,8 +27,9 @@
   --muted: #64748b;
   --border: #e2e8f0;
   --surface: #f8fafc;
-  --brand: #006bb0;
-  --brand-dark: #005b96;
+  --brand: #006cb5;
+  --brand-dark: #004b7c;
+  --button: #1d71b8;
   --accent: #96c11f;
   --accent-soft: #f5f9e9;
   --danger: #ef4444;
